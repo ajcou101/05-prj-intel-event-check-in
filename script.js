@@ -18,21 +18,32 @@ form.addEventListener("submit", function (event) {
 
   console.log(name, team, teamName);
 
-  // Increment Count
-  count++;
-  console.log("Total Check-Ins:", count);
+  // Check if Attendee Count is within limit.
+  if (count <= maxCount) {
+    count++;
 
-  // Update Progress Bar
-  const percentage = Math.round((count / maxCount) * 100) + "%";
-  console.log(`Progress: ${percentage}`);
+    // Update Attendee Counter
+    const attendeeCounter = document.getElementById("attendeeCount");
+    attendeeCounter.textContent = count;
+    console.log("Total Check-Ins:", count);
 
-  // Update Team Counter
-  const teamCounter = document.getElementById(team + "Count");
-  teamCounter.textContent = parseInt(teamCounter.textContent) + 1;
+    // Update Progress Bar
+    const percentage = Math.round((count / maxCount) * 100) + "%";
+    const progressBar = document.getElementById("progressBar");
+    progressBar.style.width = percentage;
+    console.log(`Progress: ${percentage}`);
 
-  // Show welcome message
-  const message = `Welcome, ${name} from ${teamName}`;
-  console.log(message);
+    // Update Team Counter
+    const teamCounter = document.getElementById(team + "Count");
+    teamCounter.textContent = parseInt(teamCounter.textContent) + 1;
+
+    // Show welcome message
+    const message = `🎉 Welcome, ${name} from ${teamName}`;
+    const greetingMessage = document.getElementById("greeting");
+    greetingMessage.textContent = message;
+    greetingMessage.style.display = "block";
+    console.log(message);
+  }
 
   // Reset form
   form.reset();
